@@ -1,0 +1,14 @@
+# PDF files
+*.pdf
+MoraSpirit Recruitment Task 1.pdf
+MoraSpirit Recruitment Task 02.pdf
+
+# Dependencies & build outputs
+node_modules/
+.next/
+dist/
+build/
+
+# Operating System Files
+.DS_Store
+Thumbs.db

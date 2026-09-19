@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4">
+    <main class="w-full max-w-2xl text-center">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-2">Countdown Timer</h1>
+        <p class="text-slate-400 mb-6">Pick a date and time to start counting down.</p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+            <label for="target" class="sr-only">Target date and time</label>
+            <input id="target" type="datetime-local"
+                class="rounded-lg bg-slate-800 border border-slate-600 px-4 py-3 text-white" />
+            <button id="start" class="rounded-lg bg-indigo-500 hover:bg-indigo-400 px-6 py-3 font-semibold">
+                Start
+            </button>
+            <button id="reset" class="rounded-lg bg-slate-700 hover:bg-slate-600 px-6 py-3 font-semibold">
+                Reset
+            </button>
+        </div>
+
+        <p id="message" role="status" aria-live="polite" class="h-8 mb-4 text-lg font-semibold"></p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            <div class="rounded-2xl bg-slate-800 py-6">
+                <div id="days" class="text-4xl sm:text-5xl font-bold tabular-nums">00</div>
+                <div class="text-slate-400 mt-1 text-sm uppercase tracking-wide">Days</div>
+            </div>
+            <div class="rounded-2xl bg-slate-800 py-6">
+                <div id="hours" class="text-4xl sm:text-5xl font-bold tabular-nums">00</div>
+                <div class="text-slate-400 mt-1 text-sm uppercase tracking-wide">Hours</div>
+            </div>
+            <div class="rounded-2xl bg-slate-800 py-6">
+                <div id="minutes" class="text-4xl sm:text-5xl font-bold tabular-nums">00</div>
+                <div class="text-slate-400 mt-1 text-sm uppercase tracking-wide">Minutes</div>
+            </div>
+            <div class="rounded-2xl bg-slate-800 py-6">
+                <div id="seconds" class="text-4xl sm:text-5xl font-bold tabular-nums">00</div>
+                <div class="text-slate-400 mt-1 text-sm uppercase tracking-wide">Seconds</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

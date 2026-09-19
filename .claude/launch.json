@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "task-01-availability-dashboard", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}

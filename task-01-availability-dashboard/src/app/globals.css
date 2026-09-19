@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0c;
+  --foreground: #fafafa;
 }
 
 @theme inline {
@@ -12,15 +12,76 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* The shader canvas sits at -z-10 inside <body>, so <body> must not paint over
+   it. The fallback colour lives on <html> instead — it shows through if WebGL
+   is unavailable and the canvas stays blank. */
+html {
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Liquid glass, neutral and dark-tinted. A white-translucent pane lightens
+   whatever is behind it, so over the shader's bright regions the card and the
+   background converge and the edges dissolve. Tinting dark instead keeps the
+   pane darker than its backdrop everywhere on screen, so white text and the
+   border always hold. Neutral greys, not the shader's hue — the colour stays
+   in the background where it belongs.
+   The layered shadow does the depth work: a bright inset line along the top
+   edge reads as the lit rim of a thick slab, a darker one at the bottom as its
+   shaded underside. */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgb(24 24 27 / 0.72),
+    rgb(9 9 11 / 0.78) 45%,
+    rgb(24 24 27 / 0.7)
+  );
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.2),
+    inset 0 -1px 0 0 rgb(0 0 0 / 0.35),
+    0 10px 34px -10px rgb(0 0 0 / 0.7);
+}
+
+.glass-hover:hover {
+  background: linear-gradient(
+    160deg,
+    rgb(39 39 42 / 0.74),
+    rgb(18 18 21 / 0.8) 45%,
+    rgb(39 39 42 / 0.72)
+  );
+  border-color: rgb(255 255 255 / 0.28);
+}
+
+/* Selected state: the rim lights up and the pane lifts a step, rather than
+   inverting to a solid fill which would break the glass. */
+.glass-active {
+  background: linear-gradient(
+    160deg,
+    rgb(82 82 91 / 0.72),
+    rgb(39 39 42 / 0.8) 45%,
+    rgb(63 63 70 / 0.72)
+  );
+  border-color: rgb(255 255 255 / 0.6);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.4),
+    inset 0 -1px 0 0 rgb(0 0 0 / 0.3),
+    0 12px 38px -10px rgb(0 0 0 / 0.6);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-hover:hover,
+  .glass-active {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgb(9 9 11 / 0.95);
+  }
 }
